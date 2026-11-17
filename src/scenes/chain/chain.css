@@ -1,0 +1,494 @@
+/* Chain scene: before / after of the HMGIS mineral flow. */
+
+/* Panel columns. Panels stack so they never overlap, also in projector mode. */
+.hud > .chain__col {
+  position: absolute;
+  top: 92px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+.chain__col > .panel {
+  pointer-events: auto;
+}
+.chain__col--left {
+  left: 216px;
+}
+.chain__col--right {
+  right: 24px;
+}
+.panel--top {
+  z-index: 3;
+}
+
+/* Today / With Cognecto switch, under the top bar. */
+.hud > .modeswitch {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  backdrop-filter: blur(6px);
+  z-index: 2;
+}
+.modeswitch__btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 22px;
+  background: transparent;
+  border: 0;
+  color: var(--dim);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+}
+.modeswitch__btn + .modeswitch__btn {
+  border-left: 1px solid var(--line);
+}
+.modeswitch__btn:hover {
+  color: var(--ice);
+}
+.modeswitch__btn--before.is-on {
+  color: #fff;
+  background: rgba(255, 77, 94, 0.18);
+  box-shadow: inset 0 -2px 0 var(--red);
+}
+.modeswitch__btn--after.is-on {
+  color: #fff;
+  background: rgba(95, 255, 192, 0.14);
+  box-shadow: inset 0 -2px 0 var(--ok);
+}
+.modeswitch__k {
+  font-size: 0.65rem;
+  padding: 1px 5px;
+  border: 1px solid var(--line-strong);
+  color: var(--cyan);
+  letter-spacing: 0;
+}
+
+/* Step flags in the rail. */
+.rail__name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rail__flag {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex: 0 0 6px;
+}
+.rail__flag--before {
+  background: var(--red);
+  box-shadow: 0 0 6px var(--red);
+}
+.rail__flag--after {
+  background: var(--ok);
+  box-shadow: 0 0 6px var(--ok);
+}
+
+/* Step number disc. */
+.chain__dot {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: #fff;
+}
+.chain__dot--before {
+  border: 1px solid var(--red);
+  background: rgba(255, 77, 94, 0.2);
+}
+.chain__dot--after {
+  border: 1px solid var(--ok);
+  background: rgba(95, 255, 192, 0.16);
+}
+
+/* Overview */
+.chain__kicker {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.chain__headline {
+  font-size: 1.4rem;
+  text-wrap: balance;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin: 4px 0 8px;
+}
+.chain__headline--before {
+  text-shadow: 0 0 14px rgba(255, 77, 94, 0.45);
+}
+.chain__headline--after {
+  text-shadow: 0 0 14px rgba(95, 255, 192, 0.4);
+}
+.chain__lead {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.38;
+  color: var(--ice);
+}
+.chain__mini {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 10px;
+}
+.chain__mini-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 4px 2px;
+  background: transparent;
+  border: 0;
+  color: var(--ice);
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+.chain__mini-btn:hover {
+  color: #fff;
+  background: rgba(31, 96, 192, 0.2);
+}
+.chain__hint {
+  margin-top: 10px;
+  font-size: 0.7rem;
+  color: var(--dim);
+}
+
+/* Step detail */
+.chain__step-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.chain__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.chain__list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.32;
+}
+.chain__list li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+.chain__gap {
+  color: #ffd0d5;
+}
+.chain__gap::before {
+  content: '✕';
+  color: var(--red);
+}
+.chain__control {
+  color: var(--ice);
+}
+.chain__control::before {
+  content: '✓';
+  color: var(--ok);
+}
+.chain__control b {
+  color: var(--ok);
+  font-weight: 600;
+}
+.chain__closes {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 10px;
+  border-left: 2px solid var(--red);
+  background: rgba(255, 77, 94, 0.07);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #ffb3bb;
+}
+.chain__closes s {
+  text-decoration-color: rgba(255, 77, 94, 0.9);
+  text-decoration-thickness: 1.5px;
+}
+.chain__closes-k {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* Who writes the number */
+.chain__sources {
+  display: flex;
+  flex-direction: column;
+}
+.chain__source {
+  display: grid;
+  grid-template-columns: 20px 92px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 6px;
+  background: transparent;
+  border: 0;
+  border-left: 2px solid transparent;
+  color: var(--ice);
+  font-family: var(--sans);
+  text-align: left;
+  cursor: pointer;
+}
+.chain__source + .chain__source {
+  border-top: 1px solid rgba(95, 230, 255, 0.08);
+}
+.chain__source:hover {
+  background: rgba(31, 96, 192, 0.18);
+}
+.chain__source.is-on {
+  background: linear-gradient(to right, rgba(31, 96, 192, 0.4), transparent);
+  border-left-color: var(--cyan);
+}
+.chain__source-step {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.chain__source-by {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+}
+.chain__source-by--before {
+  color: #ff9aa4;
+}
+.chain__source-by--after {
+  color: var(--ok);
+}
+.chain__verdict {
+  margin-top: 8px;
+  padding: 7px 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.32;
+}
+.chain__verdict--before {
+  border-left: 2px solid var(--red);
+  background: rgba(255, 77, 94, 0.07);
+  color: #ffd0d5;
+}
+.chain__verdict--after {
+  border-left: 2px solid var(--ok);
+  background: rgba(95, 255, 192, 0.06);
+  color: #d6fff0;
+}
+
+/* Loads dug vs on the books */
+.chain__loads {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 1.4fr;
+  gap: 10px;
+}
+.chain__big {
+  font-size: 1.45rem;
+  font-weight: 300;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(95, 230, 255, 0.5);
+  white-space: nowrap;
+}
+.chain__big.is-gap {
+  color: var(--red);
+  text-shadow: 0 0 10px rgba(255, 77, 94, 0.5);
+}
+.chain__big.is-ok {
+  color: var(--ok);
+  text-shadow: 0 0 10px rgba(95, 255, 192, 0.45);
+}
+.chain__bar {
+  display: flex;
+  height: 6px;
+  margin: 8px 0 4px;
+  background: rgba(95, 230, 255, 0.08);
+}
+.chain__bar-in {
+  background: linear-gradient(to right, var(--brand-from), var(--cyan));
+  box-shadow: 0 0 8px rgba(95, 230, 255, 0.5);
+  transition: width 0.4s;
+}
+.chain__bar-out {
+  background: repeating-linear-gradient(-45deg, rgba(255, 77, 94, 0.85) 0 4px, rgba(255, 77, 94, 0.35) 4px 8px);
+  transition: width 0.4s;
+}
+.chain__bar-out.is-none {
+  display: none;
+}
+.chain__note {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--dim);
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  margin-top: 4px;
+}
+.chain__source-note {
+  color: rgba(111, 143, 191, 0.85);
+}
+
+/* Control matrix */
+.chain__matrix {
+  display: grid;
+  grid-template-columns: 1fr repeat(6, 26px);
+  gap: 0;
+  align-items: center;
+}
+.chain__matrix-row {
+  display: contents;
+}
+.chain__matrix-h {
+  height: 24px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+.chain__matrix-h:hover {
+  color: #fff;
+}
+.chain__matrix-h.is-on {
+  color: #fff;
+  background: rgba(95, 255, 192, 0.12);
+  box-shadow: inset 0 -2px 0 var(--ok);
+}
+.chain__matrix > span:first-child {
+  border-bottom: 1px solid var(--line);
+  height: 24px;
+}
+.chain__matrix-name {
+  padding: 4px 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ice);
+  border-bottom: 1px solid rgba(95, 230, 255, 0.07);
+  transition: opacity 0.3s;
+}
+.chain__matrix-cell {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border-bottom: 1px solid rgba(95, 230, 255, 0.07);
+  transition: opacity 0.3s;
+}
+.chain__matrix-cell.is-col {
+  background: rgba(95, 255, 192, 0.07);
+}
+.chain__matrix-cell i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 8px rgba(95, 255, 192, 0.8);
+}
+.chain__matrix-row.is-dim > * {
+  opacity: 0.3;
+}
+
+/* Leakage patterns */
+.chain__patterns {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.chain__patterns li {
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ice);
+  padding-left: 10px;
+  border-left: 2px solid rgba(255, 77, 94, 0.6);
+  transition: opacity 0.3s;
+}
+.chain__patterns li b {
+  color: #ff9aa4;
+  font-weight: 600;
+}
+.chain__patterns li.is-dim {
+  opacity: 0.3;
+}
+
+/* Closing statement, bottom centre. */
+.hud > .chain__closing {
+  position: absolute;
+  left: 50%;
+  bottom: 44px;
+  transform: translateX(-50%);
+  width: min(760px, calc(100vw - 1100px));
+  min-width: 520px;
+  padding: 10px 16px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.03em;
+  color: #fff;
+  background: var(--glass);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+  animation: panel-in 0.45s ease-out both;
+}
+.chain__closing--before {
+  border-left: 3px solid var(--red);
+}
+.chain__closing--after {
+  border-left: 3px solid var(--ok);
+}
+
+/* Ticker lines wrap instead of being cut off; the closing statement sits to the right. */
+.hud > .ticker {
+  width: 530px;
+}
+.ticker__row {
+  white-space: normal;
+  line-height: 1.25;
+}
